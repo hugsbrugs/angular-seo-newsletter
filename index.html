@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html ng-app="myAppDev" ng-strict-di>
+<head>
+	<!-- Meta -->
+    <meta charset="UTF-8" />
+	<title>AngularJS SEO Newsmetter</title>
+
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    <!-- FONT AWESOME -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+    <!-- ANGULAR SEO NEWSLETTER CSS -->
+    <link href="dist/angular-seo-newsletter.min.css" rel="stylesheet">
+    <!-- <link href="src/css/angular-seo-newsletter.css" rel="stylesheet"> -->
+
+    <!-- ANGULAR -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular-cookies.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular-resource.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular-sanitize.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular-animate.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular-mocks.js"></script>
+    <!-- ANGULAR TRANSLATE -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-translate/2.10.0/angular-translate.min.js"></script>
+    <!-- ANGULAR TRANSLATE COOKIE STORAGE -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-translate/2.10.0/angular-translate-storage-cookie/angular-translate-storage-cookie.min.js"></script>
+    <!-- ANGULAR TRANSLATE PARTIAL LOADER -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-translate/2.10.0/angular-translate-loader-partial/angular-translate-loader-partial.min.js"></script>
+    <!-- ANGULAR TRANSLATE LOG -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-translate/2.10.0/angular-translate-handler-log/angular-translate-handler-log.min.js"></script>
+        
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <h1 class="text-center">Angular SEO Newsletter</h1>
+        <p class=text-center><i class="fa fa-4x fa-newspaper-o"></i></p>
+        <h5 class="text-center"><span translate>BUILD_BY</span> <a href="https://hugo.maugey.fr" target="_blank">Hugo Maugey</a> Webmaster</h5>
+    </div>
+</div>
+
+<div class="container" ng-controller="MyController">
+    <div class="row">
+        <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 text-center">
+            <hr>
+            <p>Code on - <a href="https://github.com/hugsbrugs/angular-seo-newsletter"><i class="fa fa-github"></i> GitHub</a></p>
+        </div>
+    </div>
+
+    
+
+    <div class="row" style="margin-top:100px;" ng-controller="MyController">
+        
+        <hugsbrugs-seo-newsletter ng-model="seo" showmodalext="show_modal_ext"></hugsbrugs-seo-newsletter>
+        
+        <div class="col-xs-12 col-sm-8 col-sm-offset-2" style="margin-bottom:50px;font-size:1.5em;" translate>HEADER_TEXT</div>
+
+        <div class="col-xs-12 col-sm-6">
+            <span translate>YOUR_CONFIGURATION</span>:
+            <pre>{{seo|json}}</pre>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <span translate>CURRENT_COOKIES</span>:
+            <pre>{{cookies|json}}</pre>
+            <button type="button" ng-click="delete_cookies()" class="btn btn-danger" translate>DELETE_COOKIES</button>
+            <hr>
+            <span translate>CURRENT_LANGUAGE</span>:
+            <pre>{{current_language|json}}</pre>
+            <button type="button" ng-click="change_language('en')" class="btn btn-info" translate>ENGLISH</button>
+            <button type="button" ng-click="change_language('fr')" class="btn btn-info" translate>FRENCH</button>
+        </div>
+
+    </div>
+</div>
+
+<!-- http://tholman.com/github-corners/ -->
+<a href="https://github.com/hugsbrugs/angular-seo-newsletter" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#FD6C6C; color:#fff; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+
+<!-- ANGULAR SEO NEWSLETTER JS -->
+<script src="dist/angular-seo-newsletter.min.js"></script>
+<!-- <script src="src/js/SeoNewsletterConfigs.js"></script>
+<script src="src/js/SeoNewsletterDirectives.js"></script>
+<script src="src/js/angular-seo-newsletter.js"></script> -->
+
+<script>
+
+angular.module('hugsbrugs.ExampleControllers', [])
+    
+    /**
+     * Define your custom translations
+     */
+    .config(['$translateProvider', 
+        function($translateProvider)
+        {
+
+            $translateProvider.translations('en', {
+                "CUSTOM_DEFAULT_HEADER_TEXT" : "I'm a fantastic title",
+                "CUSTOM_DEFAULT_CALL_ACTION_TEXT" : "I'm a call to action",
+                "CUSTOM_DEFAULT_SUB_TEXT" : "This is a website test, your email won't be added to any mailing list !<br>Just look at source code if you don't believe me ;)",
+                "CUSTOM_DEFAULT_EMAIL_PLACEHOLDER" : "I want your mail",
+                "CUSTOM_DEFAULT_SUCCESS_TEXT" : "Thank you sweety",
+                "CUSTOM_DEFAULT_ERROR_TEXT" : "Unknown error, if you have moment please report this error through our <a ng-href='https://hugo.maugey.fr/fr/contact'>contact form</a>. Sorry for that."
+            });
+
+            $translateProvider.translations('fr', {
+                "CUSTOM_DEFAULT_HEADER_TEXT" : "Je suis un titre exceptionnel !",
+                "CUSTOM_DEFAULT_CALL_ACTION_TEXT" : "Je suis un call to action de la mort qui tue",
+                "CUSTOM_DEFAULT_SUB_TEXT" : "Ceci est un site de test, votre email ne sra ajouté à aucune mailing liste.<br>Regardez le code source si vous ne me croyez pas ;)",
+                "CUSTOM_DEFAULT_EMAIL_PLACEHOLDER" : "Je veux votre email :-)",
+                "CUSTOM_DEFAULT_SUCCESS_TEXT" : "Merci bien, à très bientôt !",
+                "CUSTOM_DEFAULT_ERROR_TEXT" : "Erreur inconnue, si vous avez un moment, merci de nous prévenir à travers le <a ng-href='https://hugo.maugey.fr/fr/contact'>formulaire de contact</a>.<br> Désolé pour le désagrément."
+            });
+
+
+
+
+            $translateProvider.translations('en', {
+                "BUILD_BY" : "Build by",
+                "HEADER_TEXT" : "To trigger newsletter modal, just move your mouse to top of page or <button type=\"button\" class=\"btn btn-success\" ng-click=\"show_modal_ext.trigger_modal()\"><i class=\"fa fa-newspaper-o\"></i> click me</button>. If modal does not show any more, delete cookies.",
+                "YOUR_CONFIGURATION" : "Your configuration",
+                "CURRENT_COOKIES" : "Current cookies",
+                "DELETE_COOKIES" : "<i class=\"fa fa-trash\"></i> Delete cookies",
+                "CURRENT_LANGUAGE" : "Current language",
+                "ENGLISH" : "English",
+                "FRENCH" : "French"
+            });
+
+            $translateProvider.translations('fr', {
+                "BUILD_BY" : "Créer par",
+                "HEADER_TEXT" : "Pour afficher le popup de newsletter, déplacer votre souris vers le haut de la page ou <button type=\"button\" class=\"btn btn-success\" ng-click=\"show_modal_ext.trigger_modal()\"><i class=\"fa fa-newspaper-o\"></i> cliquez ici</button>. Si le popup ne s'affiche plus, supprimez les cookies.",
+                "YOUR_CONFIGURATION" : "Votre configuration",
+                "CURRENT_COOKIES" : "Vos cookies",
+                "DELETE_COOKIES" : "<i class=\"fa fa-trash\"></i> Supprimer cookies",
+                "CURRENT_LANGUAGE" : "Langue sélectionnée",
+                "ENGLISH" : "Anglais",
+                "FRENCH" : "Français"
+            });
+
+        }
+    ])
+
+    /**
+     * Define your custom controller
+     */
+    .controller('MyController', ['$rootScope', '$scope', '$cookies', '$interval', '$translate',
+     function($scope, $rootScope, $cookies, $interval, $translate)
+     {
+
+        /* DEFINE YOUR CUSTOM CONFIG */
+        $scope.seo = {
+            y_offset:5,
+            // image set globally in config
+            // image:'src/img/SEO-Beginners-Guide.jpg',
+
+            header_text:'CUSTOM_DEFAULT_HEADER_TEXT',
+            call_action_text:'CUSTOM_DEFAULT_CALL_ACTION_TEXT',
+            sub_text:'CUSTOM_DEFAULT_SUB_TEXT',
+            email_placeholder:'CUSTOM_DEFAULT_EMAIL_PLACEHOLDER',
+            success_text:'CUSTOM_DEFAULT_SUCCESS_TEXT',
+            error_text:'CUSTOM_DEFAULT_ERROR_TEXT',
+
+            // download hugbrugs/php-seo-newsletter
+            //api_endpoint:'/php/register_newsletter.php',
+            // fake endpoint
+            api_endpoint:'/fake_endpoint',
+
+            cookie_expire:'10 second',//debug mode
+            // cookie_expire:'10 minute',//aggressive mode
+            // cookie_expire:'1 day',//recommended mode
+            // cookie_expire:'1 month',//cool mode
+        };
+
+
+
+
+        /* FOR EXAMPLE ONLY */
+
+        // Display internal sheet on page
+        $scope.cookies = {
+            'show_popup' : $cookies.get('show_popup'),
+            'is_subscriber' : $cookies.get('is_subscriber'),
+        };
+
+        $interval(function(){
+            // refresh cookie value
+            $scope.cookies = {
+                'show_popup' : $cookies.get('show_popup'),
+                'is_subscriber' : $cookies.get('is_subscriber'),
+            };            
+        }, 500);
+
+        $scope.delete_cookies = function()
+        {
+            $cookies.remove('show_popup');
+            $cookies.remove('is_subscriber');
+            // refresh page
+            location.reload();
+        };
+
+        $scope.current_language = $translate.use();
+        $scope.change_language = function(lang)
+        {
+            $translate.use(lang);
+            $scope.current_language = $translate.use();
+        };
+
+        $scope.trigger_modal = function()
+        {
+            $scope.show_modal();
+        };
+
+    }]);
+
+
+
+
+
+// Angular modules
+angular.module('myApp.core', [
+    'ngAnimate',
+    'ngResource',
+    'ngCookies',
+    'ngSanitize',
+    'pascalprecht.translate'
+]);
+
+// My modules
+angular.module('myApp.perso', [
+    'hugsbrugs.angular-seo-newsletter',
+    'hugsbrugs.ExampleControllers'
+]);
+
+// Production mode App
+var myApp = angular.module('myApp', [
+    'myApp.core',
+    'myApp.perso'
+]);
+
+// Develoment mode App
+var myAppDev = angular.module('myAppDev', [
+    'myApp', 
+    'ngMockE2E'
+]);
+
+// use module provider for global configuration
+// specific configuration will be done in controllers
+myAppDev.config(['hugsbrugsSeoNewsletterConfigProvider', '$translateProvider', function(hugsbrugsSeoNewsletterConfigProvider, $translateProvider) 
+    {
+        $translateProvider
+            .registerAvailableLanguageKeys(['en', 'fr'], {
+                'en_US': 'en',
+                'en_UK': 'en',
+                'fr_FR': 'fr',
+                'fr_CH': 'fr',
+                '*': 'en'
+            })
+            .determinePreferredLanguage()
+            .fallbackLanguage('en')
+            //.useLocalStorage()
+            .usePostCompiling(true)
+            .useSanitizeValueStrategy('escaped');
+            //.useSanitizeValueStrategy('sanitize');
+
+        // define global params
+        hugsbrugsSeoNewsletterConfigProvider.config({
+            image:'src/img/hugo_maugey.jpg',
+            cookie_expire:'1 day'
+        });
+    }
+]);
+
+
+// server side simulaton for test purpose
+myAppDev.run(['$httpBackend', '$log', 
+    function($httpBackend, $log)
+    {
+        var subscribers = [
+            {email: 'hus@free.fr', date:''}, 
+            {email: 'jojo@free.fr', date:''}
+        ];
+
+        // adds a new subscriber to the subscribers array
+        $httpBackend.whenPOST('/fake_endpoint')
+            .respond(function(method, url, data)
+            {
+                var data = angular.fromJson(data);
+                //$log.log('data', data);
+                var exist = false;
+                angular.forEach(subscribers, function(subscriber){
+                    if(subscriber.email===data.email)
+                        exist = true;
+                });
+                if(exist)
+                {
+                    return [404, {message:'EMAIL_ALREADY_SUBSCRIBER'}, {}];
+                }
+                else
+                {
+                    var subscriber = {email: data.email, date:''};
+                    subscribers.push(subscriber);
+                    return [200, subscriber, {}];
+                }
+            });
+        
+        // Requests for templates are handled by the real server
+        //$httpBackend.whenGET(/^\/templates\//).passThrough();
+        $httpBackend.whenGET(/\.html$/).passThrough();
+    }
+]);
+
+</script>
+
+</body>
+</html>

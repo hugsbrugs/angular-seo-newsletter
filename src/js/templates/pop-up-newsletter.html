@@ -1,0 +1,66 @@
+<div
+    style="display: none;"
+    class="newsletter-modal underlay"
+    id="newsletter-modal">
+    <div
+        class="newsletter-modal-flex newsletter-modal-flex-activated"
+        id="newsletter-modal-flex">
+        <div
+            class="newsletter-modal-sub"
+            id="newsletter-modal-sub">
+            <!-- Modal Header -->
+            <div class="modal-title">
+                <h3 ng-bind-html="ctrl.header_text | translate"></h3>
+            </div>
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <!-- Rounded Image -->
+                <p><img class="image" ng-src="{{ctrl.image}}"></p>
+                <!-- Call to Action -->
+                <p class="headline" ng-bind-html="ctrl.call_action_text | translate"></p>
+                <!-- Paragraph -->
+                <p class="subheadline" ng-bind-html="ctrl.sub_text | translate"></p>
+                <div>
+                    <form
+                        name="Newsletter"
+                        ng-submit="ctrl.register_newsletter()" 
+                        novalidate>
+                        <!-- Responses -->
+                        <div>
+                            <div
+                                style="display:none"
+                                id="seo-newsletter-error"
+                                class="response"
+                                ng-bind-html="ctrl.error_text | translate">
+                                ERROR
+                            </div>
+                            <div
+                                style="display:none"
+                                id="seo-newsletter-success"
+                                class="response"
+                                ng-bind-html="ctrl.success_text | translate">
+                                SUCCESS
+                            </div>
+                        </div>
+                        <!--  -->
+                        <div
+                            class="mc-field-group updated"
+                            id="seo-newsletter-questions">
+                            <input
+                                type="email"
+                                name="email"
+                                ng-model="email"
+                                placeholder="{{ctrl.email_placeholder | translate}}">
+                            <input
+                                type="submit"
+                                class="button"
+                                id="mc-embedded-subscribe"
+                                name="subscribe"
+                                ng-disabled="Newsletter.$invalid">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+     </div>
+</div>

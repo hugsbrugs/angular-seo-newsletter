@@ -1,0 +1,22 @@
+{
+  "name": "angular-seo-newsletter",
+  "description": "Angular seo newsletter displays a modal when user leave your website.",
+  "main": "index.html",
+  "authors": [
+    "Hugo Maugey"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "angularjs",
+    "seo",
+    "newsletter"
+  ],
+  "homepage": "http://hugsbrugs.github.io/angular-seo-newsletter/",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

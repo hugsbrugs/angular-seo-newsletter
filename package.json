@@ -1,0 +1,42 @@
+{
+  "name": "angular-seo-newsletter",
+  "version": "1.0.0",
+  "description": "Angular seo newsletter displays a modal when user leave your website.",
+  "main": "index.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "tests/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:hugsbrugs/angular-seo-newsletter.git"
+  },
+  "keywords": [
+    "angularjs",
+    "seo",
+    "newsletter"
+  ],
+  "author": "Hugo Maugey",
+  "license": "ISC",
+  "homepage": "https://github.com/hugsbrugs/angular-seo-newsletter",
+  "devDependencies": {
+    "add-stream": "^1.0.0",
+    "del": "^2.2.0",
+    "gulp": "^3.9.1",
+    "gulp-angular-embed-templates": "^2.2.0",
+    "gulp-angular-templatecache": "^1.8.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-connect": "^4.0.0",
+    "gulp-cssnano": "^2.1.2",
+    "gulp-htmlmin": "^2.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sync": "^0.1.4",
+    "gulp-uglify": "^1.5.3",
+    "karma": "^0.13.22",
+    "karma-chrome-launcher": "^1.0.1",
+    "karma-jasmine": "^1.0.2",
+    "q": "^1.4.1"
+  }
+}

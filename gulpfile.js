@@ -46,7 +46,7 @@ function prepareTemplates()
 
 
 // minify javascript
-gulp.task('js', function() {
+gulp.task('js-min', function() {
     //return gulp.src([source + 'js/angular-seo-newsletter.js'])
     return gulp.src([source + 'js/**/*.js'])
         //.pipe(embedTemplates({basePath:'/var/www/angular-lib/angular-seo-newsletter/src/js/templates'}))
@@ -57,11 +57,27 @@ gulp.task('js', function() {
         .pipe(gulp.dest(output));
 });
 
+gulp.task('js', function() {
+    //return gulp.src([source + 'js/angular-seo-newsletter.js'])
+    return gulp.src([source + 'js/**/*.js'])
+//        .pipe(uglify({mangle:false}))
+        .pipe(addStream.obj(prepareTemplates()))
+        .pipe(concat('angular-seo-newsletter.js'))
+//        .pipe(rename({ suffix: '.min' }))
+        .pipe(gulp.dest(output));
+});
+
 // minify css
-gulp.task('css', function() {
+gulp.task('css-min', function() {
     return gulp.src([source + 'css/angular-seo-newsletter.css'])
         .pipe(cssnano({discardComments: {removeAll: true}}))
         .pipe(rename({ suffix: '.min' }))
+        .pipe(gulp.dest(output));
+});
+
+gulp.task('css', function() {
+    return gulp.src([source + 'css/angular-seo-newsletter.css'])
+        .pipe(cssnano({discardComments: {removeAll: true}}))
         .pipe(gulp.dest(output));
 });
 
@@ -70,6 +86,8 @@ gulp.task('build', gulpsync.sync([
     //'clean',
     'js', 
     'css',
+    'js-min', 
+    'css-min',
 ]));
 
 

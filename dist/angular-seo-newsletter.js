@@ -154,8 +154,8 @@ angular.module('hugsbrugs.angular-seo-newsletter-directives', [])
                             })
                             .catch(function(error)
                             {
-                                $log.log('error', error);
-                                ctrl.show_error(error.message);
+                                // $log.log('error', error);
+                                ctrl.show_error(error.data.message);
                             });
                     };
 

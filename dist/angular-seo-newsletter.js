@@ -103,7 +103,7 @@ angular.module('hugsbrugs.angular-seo-newsletter-directives', [])
         return {
             restrict: 'E',
             controllerAs: 'ctrl',
-            bindToController: {
+            scope: {
                 model:'=ngModel',
                 //show_modal_ext:'='
                 showmodalext:'='
@@ -119,18 +119,19 @@ angular.module('hugsbrugs.angular-seo-newsletter-directives', [])
                     var config = hugsbrugsSeoNewsletterConfig;
 
                     var ctrl = this;
+                    console.log($scope.model);
 
                     // set variables from model or config
-                    ctrl.y_offset = ctrl.model.y_offset || config.y_offset;
-                    ctrl.header_text = ctrl.model.header_text || config.header_text;
-                    ctrl.call_action_text = ctrl.model.call_action_text || config.call_action_text;
-                    ctrl.sub_text = ctrl.model.sub_text || config.sub_text;
-                    ctrl.email_placeholder = ctrl.model.email_placeholder || config.email_placeholder;
-                    ctrl.image = ctrl.model.image || config.image;                    
-                    ctrl.success_text = ctrl.model.success_text || config.success_text;
-                    ctrl.error_text = ctrl.model.error_text || config.error_text;
-                    ctrl.api_endpoint = ctrl.model.api_endpoint || config.api_endpoint;
-                    ctrl.cookie_expire = ctrl.model.cookie_expire || config.cookie_expire;
+                    ctrl.y_offset = $scope.model.y_offset || config.y_offset;
+                    ctrl.header_text = $scope.model.header_text || config.header_text;
+                    ctrl.call_action_text = $scope.model.call_action_text || config.call_action_text;
+                    ctrl.sub_text = $scope.model.sub_text || config.sub_text;
+                    ctrl.email_placeholder = $scope.model.email_placeholder || config.email_placeholder;
+                    ctrl.image = $scope.model.image || config.image;                    
+                    ctrl.success_text = $scope.model.success_text || config.success_text;
+                    ctrl.error_text = $scope.model.error_text || config.error_text;
+                    ctrl.api_endpoint = $scope.model.api_endpoint || config.api_endpoint;
+                    ctrl.cookie_expire = $scope.model.cookie_expire || config.cookie_expire;
 
                     // call remote API for saving subscriber to newsletter
                     ctrl.register_newsletter = function()
@@ -140,7 +141,7 @@ angular.module('hugsbrugs.angular-seo-newsletter-directives', [])
 
                         // Send to Remote API
                         $http.post(ctrl.api_endpoint, {email:$scope.email})
-                            .success( function(data)
+                            .then( function(data)
                             {
                                 // hide form
                                 ctrl.hide_form();
@@ -151,7 +152,7 @@ angular.module('hugsbrugs.angular-seo-newsletter-directives', [])
                                 // close modal
                                 $scope.hide_modal(2000);
                             })
-                            .error(function(error)
+                            .catch(function(error)
                             {
                                 $log.log('error', error);
                                 ctrl.show_error(error.message);
@@ -162,7 +163,7 @@ angular.module('hugsbrugs.angular-seo-newsletter-directives', [])
                     {
                         var elm = angular.element(window.document.getElementById('seo-newsletter-error'));
                         elm.css('display', 'none');
-                        ctrl.error_text = ctrl.model.error_text || config.error_text;
+                        ctrl.error_text = $scope.model.error_text || config.error_text;
                     };
 
                     ctrl.show_error = function(text)
@@ -195,6 +196,8 @@ angular.module('hugsbrugs.angular-seo-newsletter-directives', [])
                 var is_subscriber = $cookies.get('is_subscriber') || 'false';
                 $log.log('show_popup', show_popup);
                 $log.log('is_subscriber', is_subscriber);
+                $log.log('coucou');
+                $log.log('showmodalext', scope.show_modal_ext);
 
                 if(is_subscriber==='false')
                 {
@@ -245,9 +248,11 @@ angular.module('hugsbrugs.angular-seo-newsletter-directives', [])
 
                         // Call from outside directive
                         // http://stackoverflow.com/questions/16881478/how-to-call-a-method-defined-in-an-angularjs-directive
+                        
                         scope.show_modal_ext = scope.show_modal_ext || {};
                         scope.show_modal_ext.trigger_modal = function()
                         {
+                            console.log('scope.show_modal_ext.trigger_modal');
                             scope.show_modal();
                         }
 
@@ -359,84 +364,6 @@ angular.module('hugsbrugs.angular-seo-newsletter-directives', [])
         }
     }])
 
-/*
-    .run(['$templateCache', 
-        function ($templateCache)
-        {
-            if ($templateCache.get('templates/pop-up-newsletter.html') === undefined)
-            {
-                $templateCache.put("templates/pop-up-newsletter.html",
-'<div ' +
-    'style="display: none;"' +
-    'class="newsletter-modal underlay"' +
-    'id="newsletter-modal">' +
-    '<div ' +
-        'class="newsletter-modal-flex newsletter-modal-flex-activated"' +
-        'id="newsletter-modal-flex">' +
-        '<div ' +
-            'class="newsletter-modal-sub"' +
-            'id="newsletter-modal-sub">' +
-            '<!-- Modal Header -->' +
-            '<div class="modal-title">' +
-                '<h3 ng-bind-html="ctrl.header_text | translate"></h3>' +
-            '</div>' +
-            '<!-- Modal Body -->' +
-            '<div class="modal-body">' +
-                '<!-- Rounded Image -->' +
-                '<p><img class="image" ng-src="{{ctrl.image}}"></p>' +
-                '<!-- Call to Action -->' +
-                '<p class="headline" ng-bind-html="ctrl.call_action_text | translate"></p>' +
-                '<!-- Paragraph -->' +
-                '<p class="subheadline" ng-bind-html="ctrl.sub_text | translate"></p>' +
-                '<div>' +
-                    '<form ' +
-                        'name="Newsletter"' +
-                        'ng-submit="ctrl.register_newsletter()" ' +
-                        'novalidate>' +
-                        '<!-- Responses -->' +
-                        '<div>' +
-                            '<div ' +
-                                'style="display:none"' +
-                                'id="seo-newsletter-error"' +
-                                'class="response"' +
-                                'ng-bind-html="ctrl.error_text | translate">' +
-                                'ERROR' +
-                            '</div>' +
-                            '<div ' +
-                                'style="display:none"' +
-                                'id="seo-newsletter-success"' +
-                                'class="response"' +
-                                'ng-bind-html="ctrl.success_text | translate">' +
-                                'SUCCESS' +
-                            '</div>' +
-                        '</div>' +
-                        '<!--  -->' +
-                        '<div ' +
-                            'class="mc-field-group updated"' +
-                            'id="seo-newsletter-questions">' +
-                            '<input ' +
-                                'type="email"' +
-                                'name="email"' +
-                                'ng-model="email"' +
-                                'placeholder="{{ctrl.email_placeholder | translate}}">' +
-                            '<input ' +
-                                'type="submit"' +
-                                'class="button"' +
-                                'id="mc-embedded-subscribe"' +
-                                'name="subscribe"' +
-                                'ng-disabled="Newsletter.$invalid">' +
-                        '</div>' +
-                    '</form>' +
-                '</div>' +
-            '</div>' +
-        '</div>' +
-     '</div>' +
-'</div>'
-                );
-            }
-        }
-    ]);
-*/
 'use strict';
 
 /**
